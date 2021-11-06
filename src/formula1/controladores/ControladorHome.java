@@ -10,6 +10,7 @@ import formula1.modelos.Escuderia;
 import formula1.modelos.Piloto;
 import formula1.vistas.VistaHome;
 import formula1.vistas.VistaRegistro;
+import formula1.vistas.VistaSalida;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -45,7 +46,12 @@ public class ControladorHome  implements ActionListener{
         String id=vistaHome.cajaIdEscuderia.getText();
         
         if(consulta.buscarEscuderia(id)!=null){
-            JOptionPane.showMessageDialog(null, "ya existe");        
+            VistaSalida vistaSalida = new VistaSalida();
+            vistaHome.setVisible(false);
+            vistaSalida.setVisible(true);
+            
+            
+            ControladorSalida controladorSalida = new ControladorSalida(vistaSalida, escuderia, piloto);      
         }else{
             VistaRegistro vistaRegistro = new VistaRegistro();
             vistaRegistro.setVisible(true);

@@ -98,4 +98,32 @@ public class ConsultasPilotos extends ModeloBD {
        
    } 
     
+    public boolean actualizar(Piloto piloto){
+        Connection conexion=conectarBD();
+        String query="UPDATE pilotos SET fecha_salida=? WHERE id=?";
+        
+        try{
+            consultaSQL=conexion.prepareStatement(query);
+            
+            consultaSQL.setString(1, piloto.getFechaOut());
+            consultaSQL.setInt(2, piloto.getId());
+            
+            int resultado=consultaSQL.executeUpdate();
+            
+            if(resultado>0){
+              return true;  
+            }else{
+               return false; 
+            }
+            
+            
+        
+        }catch(Exception error){
+            System.out.println("upss"+error);
+            return false;
+        }
+
+    }
+    
+    
 }
